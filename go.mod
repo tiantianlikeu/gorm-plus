@@ -1,4 +1,4 @@
-module github/tiantianlikeu/gorm-plus
+module github.com/tiantianlikeu/gorm-plus
 
 go 1.20
 

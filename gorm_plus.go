@@ -40,7 +40,11 @@ func Save[T any](entity *T, dbs ...*gorm.DB) *gorm.DB {
 
 func SaveOrUpdate[T any](entity *T, dbs ...*gorm.DB) *gorm.DB {
 	db := DB(dbs...)
-	resultDb := db.Create(entity)
+	resultDb := UpdateById(entity)
+	affected := resultDb.RowsAffected
+	if affected == 0 {
+		resultDb = db.Create(entity)
+	}
 	return resultDb
 }
 
