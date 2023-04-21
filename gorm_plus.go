@@ -118,7 +118,7 @@ func SelectById[T any](id any, dbs ...*gorm.DB) (*T, *gorm.DB) {
 	q.Eq(getPkColumnName[T](), id)
 	var entity T
 	resultDb := buildCondition(q, dbs...)
-	return &entity, resultDb.Limit(1).Find(&entity)
+	return &entity, resultDb.First(&entity)
 }
 
 func SelectByIds[T any](ids any, dbs ...*gorm.DB) ([]*T, *gorm.DB) {
@@ -130,7 +130,7 @@ func SelectByIds[T any](ids any, dbs ...*gorm.DB) ([]*T, *gorm.DB) {
 func SelectOne[T any](q *Query[T], dbs ...*gorm.DB) (*T, *gorm.DB) {
 	var entity T
 	resultDb := buildCondition(q, dbs...)
-	return &entity, resultDb.Limit(1).Find(&entity)
+	return &entity, resultDb.First(&entity)
 }
 
 func Exists[T any](q *Query[T], dbs ...*gorm.DB) (bool, error) {
